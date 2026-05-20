@@ -18,43 +18,27 @@ chrome.runtime.onInstalled.addListener(() => {
     contexts: ["selection"]
   });
 
-  // 子選單：shiroutowiki
+  // 子選單：Shiroutowiki
   chrome.contextMenus.create({
     id: "search-shiroutowiki",
     parentId: "quick-search-parent",
-    title: "shiroutowiki",
+    title: "Shiroutowiki",
     contexts: ["selection"]
   });
 
-  // 子選單：seesaawiki
+  // 子選單：Seesaawiki
   chrome.contextMenus.create({
     id: "search-seesaawiki",
     parentId: "quick-search-parent",
-    title: "seesaawiki",
+    title: "Seesaawiki",
     contexts: ["selection"]
   });
 
-  // 分隔線
-  chrome.contextMenus.create({
-    id: "separator",
-    parentId: "quick-search-parent",
-    type: "separator",
-    contexts: ["selection"]
-  });
-
-  // 子選單：FANZA 番號
+  // 子選單：Fanza
   chrome.contextMenus.create({
     id: "search-fanza",
     parentId: "quick-search-parent",
-    title: "FANZA 番號",
-    contexts: ["selection"]
-  });
-
-  // 子選單：DMM list
-  chrome.contextMenus.create({
-    id: "search-dmm-list",
-    parentId: "quick-search-parent",
-    title: "DMM 關鍵字",
+    title: "Fanza",
     contexts: ["selection"]
   });
 });
@@ -78,15 +62,10 @@ chrome.contextMenus.onClicked.addListener((info) => {
       if (fanzaId) {
         url = `https://video.dmm.co.jp/av/content/?id=${fanzaId}`;
       } else {
-        // 格式不對就改用 DMM list
         url = `https://video.dmm.co.jp/av/list/?key=${encodeURIComponent(selected)}`;
       }
       break;
     }
-
-    case "search-dmm-list":
-      url = `https://video.dmm.co.jp/av/list/?key=${encodeURIComponent(selected)}`;
-      break;
   }
 
   if (url) {
