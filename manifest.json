@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "快速搜尋引擎",
+  "version": "1.0",
+  "description": "選取文字後右鍵快速搜尋指定網站",
+  "permissions": ["contextMenus", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
