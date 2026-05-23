@@ -11,14 +11,12 @@ function toFanzaId(raw) {
 
 // 建立右鍵選單
 chrome.runtime.onInstalled.addListener(() => {
-  // 父選單
   chrome.contextMenus.create({
     id: "quick-search-parent",
     title: "快速搜尋",
     contexts: ["selection"]
   });
 
-  // 子選單：Shiroutowiki
   chrome.contextMenus.create({
     id: "search-shiroutowiki",
     parentId: "quick-search-parent",
@@ -26,7 +24,6 @@ chrome.runtime.onInstalled.addListener(() => {
     contexts: ["selection"]
   });
 
-  // 子選單：Seesaawiki
   chrome.contextMenus.create({
     id: "search-seesaawiki",
     parentId: "quick-search-parent",
@@ -34,11 +31,38 @@ chrome.runtime.onInstalled.addListener(() => {
     contexts: ["selection"]
   });
 
-  // 子選單：Fanza
   chrome.contextMenus.create({
     id: "search-fanza",
     parentId: "quick-search-parent",
     title: "Fanza",
+    contexts: ["selection"]
+  });
+
+  chrome.contextMenus.create({
+    id: "separator",
+    parentId: "quick-search-parent",
+    type: "separator",
+    contexts: ["selection"]
+  });
+
+  chrome.contextMenus.create({
+    id: "search-fanza-google",
+    parentId: "quick-search-parent",
+    title: "搜尋 Fanza",
+    contexts: ["selection"]
+  });
+
+  chrome.contextMenus.create({
+    id: "search-jav321",
+    parentId: "quick-search-parent",
+    title: "搜尋 JAV321",
+    contexts: ["selection"]
+  });
+
+  chrome.contextMenus.create({
+    id: "search-rav",
+    parentId: "quick-search-parent",
+    title: "搜尋 R-AV",
     contexts: ["selection"]
   });
 });
@@ -66,6 +90,18 @@ chrome.contextMenus.onClicked.addListener((info) => {
       }
       break;
     }
+
+    case "search-fanza-google":
+      url = `https://www.google.com/search?q=site:video.dmm.co.jp+${encodeURIComponent(selected)}`;
+      break;
+
+    case "search-jav321":
+      url = `https://www.google.com/search?q=site:jav321.com+${encodeURIComponent(selected)}`;
+      break;
+
+    case "search-rav":
+      url = `https://www.google.com/search?q=site:r-av.cc+${encodeURIComponent(selected)}`;
+      break;
   }
 
   if (url) {
